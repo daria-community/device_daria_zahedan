@@ -71,7 +71,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
     $(LOCAL_PATH)/configs/audio/bluetooth_offload_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_offload_audio_policy_configuration.xml \
     $(LOCAL_PATH)/configs/audio/usb_audio_accessory_only_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_accessory_only_policy_configuration.xml \
-    $(LOCAL_PATH)/prebuilt/dtbo.img:prebuilt/dtbo.img
 
 PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
@@ -181,6 +180,7 @@ PRODUCT_BUILD_DEBUG_BOOT_IMAGE := true
 PRODUCT_BUILD_VENDOR_BOOT_IMAGE := true
 PRODUCT_BUILD_INIT_BOOT_IMAGE := true
 PRODUCT_BUILD_SYSTEM_DLKM_IMAGE := true
+PRODUCT_BUILD_VENDOR_DLKM_IMAGE := true
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -417,7 +417,7 @@ PRODUCT_PACKAGES += \
     vendor_init_as_system.rc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/fstab.mt6877:first_stage_ramdisk/system/etc/fstab.mt6877
+    $(LOCAL_PATH)/rootdir/etc/fstab.mt6877:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6877
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/prebuilt/avb/q-developer-gsi.avbpubkey:first_stage_ramdisk/avb/q-developer-gsi.avbpubkey \
