@@ -398,10 +398,12 @@ PRODUCT_PACKAGES += \
     init.modem.rc \
     init.mt6877.rc \
     init.mt6877.usb.rc \
+    init.mt6877.vendor.rc \
     init.project.rc \
     init.recovery.mt6877.rc \
     init.sensor_2_0.rc \
     init.stnfc.rc \
+    factory_init.connectivity.common.rc \
     factory_init.connectivity.rc \
     factory_init.project.rc \
     factory_init.rc \
@@ -418,11 +420,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.mt6877:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.mt6877
-
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/prebuilt/avb/q-developer-gsi.avbpubkey:first_stage_ramdisk/avb/q-developer-gsi.avbpubkey \
-    $(DEVICE_PATH)/prebuilt/avb/r-developer-gsi.avbpubkey:first_stage_ramdisk/avb/r-developer-gsi.avbpubkey \
-    $(DEVICE_PATH)/prebuilt/avb/s-developer-gsi.avbpubkey:first_stage_ramdisk/avb/s-developer-gsi.avbpubkey
 
 # Shipping API level
 PRODUCT_SHIPPING_API_LEVEL := 31
