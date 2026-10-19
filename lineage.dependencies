@@ -12,6 +12,6 @@
   {
     "repository": "daria-community/vendor_daria_zahedan",
     "target_path": "vendor/daria/zahedan",
-    "branch": "Itis_Sajjad/testing/lineage-22.2-6.6"
+    "branch": "itisFarzin/testing/lineage-23.0-6.6"
   }
 ]
