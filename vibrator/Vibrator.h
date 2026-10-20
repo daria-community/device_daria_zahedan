@@ -24,11 +24,11 @@ namespace android {
 namespace hardware {
 namespace vibrator {
 
-const std::string kVibratorState       = "/sys/class/leds/vibrator/state";
-const std::string kVibratorDuration    = "/sys/class/leds/vibrator/duration";
-const std::string kVibratorActivate    = "/sys/class/leds/vibrator/activate";
+const std::string kVibratorState       = "/sys/class/leds/aw_vibrator/state";
+const std::string kVibratorDuration    = "/sys/class/leds/aw_vibrator/duration";
+const std::string kVibratorActivate    = "/sys/class/leds/aw_vibrator/activate";
 
-const std::string kVibratorStrength    = "/sys/class/leds/vibrator/gain";
+const std::string kVibratorStrength    = "/sys/class/leds/aw_vibrator/gain";
 
 static std::map<Effect, int32_t> vibEffects = {
     { Effect::CLICK, 50 },

@@ -179,3 +179,35 @@
 # Torch light
 /sys/devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360_pmu_fled.3.auto/mt6360_pmu_fled.0/rt-flash-led.0/flashlight/mt-flash-led1   torch_brightness  0660   cameraserver   camera
 /sys/devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360_pmu_fled.3.auto/mt6360_pmu_fled.1/rt-flash-led.1/flashlight/mt-flash-led2   torch_brightness  0660   cameraserver   camera
+
+
+# Align with stock V6.7.2.0 ueventd.rc (additions only)
+# Logo / modem partitions (A/B OTA)
+/dev/block/by-name/logo_a        0660    root    system
+/dev/block/by-name/logo_b        0660    root    system
+/dev/block/by-name/modem         0640    root    system
+/dev/block/by-name/modem_a       0640    root    system
+/dev/block/by-name/modem_b       0640    root    system
+
+# GenieZone VM (AVF)
+/dev/gzvm                        0666    root    root
+
+# Sensor hub manager
+/dev/hf_manager                  0660    system  system
+
+# DMA_HEAP device permission (MTK heaps)
+/dev/dma_heap/mtk_mm                       0444   system   system
+/dev/dma_heap/mtk_mm-uncached              0444   system   system
+/dev/dma_heap/mtk_svp_page-uncached        0444   system   system
+/dev/dma_heap/mtk_prot_page-uncached       0444   system   system
+/dev/dma_heap/mtk_svp_region               0444   system   system
+/dev/dma_heap/mtk_svp_region-aligned       0444   system   system
+/dev/dma_heap/mtk_svp_region-uncached      0444   system   system
+/dev/dma_heap/mtk_prot_region              0444   system   system
+/dev/dma_heap/mtk_prot_region-aligned      0444   system   system
+/dev/dma_heap/mtk_prot_region-uncached     0444   system   system
+/dev/dma_heap/mtk_2d_fr_region             0444   system   system
+/dev/dma_heap/mtk_2d_fr_region-aligned     0444   system   system
+/dev/dma_heap/mtk_wfd_region               0444   system   system
+/dev/dma_heap/mtk_wfd_region-aligned       0444   system   system
+/dev/dma_heap/mtk_wfd_page-uncached        0444   system   system

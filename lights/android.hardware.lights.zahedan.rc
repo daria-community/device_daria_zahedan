@@ -1,4 +1,4 @@
-service vendor.light /vendor/bin/hw/android.hardware.lights-service.zahedan
+service vendor.light-default /vendor/bin/hw/android.hardware.lights-service.zahedan
     class hal
     user system
     group system

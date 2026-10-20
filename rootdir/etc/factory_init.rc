@@ -343,7 +343,6 @@ on fs
 
 #INTERNAL_START
     write /proc/bootprof "INIT:Mount_START"
-    wait_for_prop hwservicemanager.ready "true"
     start vendor.boot-hal-1-2
     mount_all --early
     write /proc/bootprof "INIT:Mount_END"
@@ -426,7 +425,6 @@ on late-fs
 
     # HALs required before storage encryption can get unlocked (FBE/FDE)
     class_start early_hal
-    wait_for_prop hwservicemanager.ready "true"
     start vendor.keymaster-3-0
     start vendor.keymaster-3-0-trustonic
     start vendor.keymaster-4-0
@@ -438,6 +436,8 @@ on late-fs
 
 on post-fs-data
     write /proc/bootprof "INIT:post-fs-data"
+    wait_for_prop vendor.all.modules.ready 1
+    write /proc/bootprof "modprobe: Load_Module_DONE"
 
 	#Thermal
 	mkdir /data/.tp/ 0775 system system
@@ -506,6 +506,22 @@ on post-fs-data
     #set mlock limit to infinate (for m4u operation)
     setrlimit 8 -1 -1
 
+    # Sensor
+    chmod 0666 /dev/hwmsensor
+    chmod 0666 /dev/gyroscope
+    chmod 0666 /dev/msensor
+    chmod 0666 /dev/gsensor
+    chmod 0666 /dev/als_ps
+    chmod 0666 /dev/humidity
+    chmod 0666 /dev/barometer
+
+    chown system system /dev/hwmsensor
+    chown system system /dev/msensor
+    chown system system /dev/gsensor
+    chown radio system /dev/als_ps
+    chown system system /dev/gyroscope
+    chown system system /dev/barometer
+    chown system system /dev/humidity
 
     #VideoCodec
     chmod 0666 /dev/Vcodec
@@ -720,9 +736,9 @@ service ccci_rpcd /vendor/bin/ccci_rpcd 0
     group radio system
     oneshot
 
-#prize del by lvyuanchuan for disable-fg,20221026
+
 service fuelgauged /vendor/bin/fuelgauged
-#    class main
+    class main
     user system
     group system
 

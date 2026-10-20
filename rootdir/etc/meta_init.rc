@@ -13,7 +13,10 @@ import /vendor/etc/init/hw/meta_init.project.rc
 import /vendor/etc/init/microtrust.rc
 import /vendor/etc/init/android.hardware.boot@1.2-service.rc
 import /vendor/etc/init/android.hardware.boot@1.2-service-lazy.rc
-import /vendor/etc/init/android.hardware.health@2.1-service.rc
+import /vendor/etc/init/android.hardware.health-service.example.rc
+
+#touch
+import /vendor/etc/init/init.touch.rc
 
 #import /vendor/etc/init/hw/multi_init.rc
 #phase out multi_init.rc, move related vendor rc to here.
@@ -41,8 +44,8 @@ import /vendor/etc/init/android.hardware.audio.service.mediatek.rc
 import /vendor/etc/init/vendor.mediatek.hardware.keymaster_attestation@1.1-service.rc
 import /vendor/etc/init/android.hardware.nfc@1.2-service-st.rc
 import /vendor/etc/init/tee.rc
-import /vendor/etc/init/vendor.mediatek.hardware.nvram@1.1-sevice.rc
-import /vendor/etc/init/vendor.mediatek.hardware.nvram@1.1-sevice-lazy.rc
+import /vendor/etc/init/vendor.mediatek.hardware.nvram-sevice.rc
+import /vendor/etc/init/vendor.mediatek.hardware.nvram-sevice-lazy.rc
 import /vendor/etc/init/android.hardware.light@2.0-service-mediatek.rc
 import /vendor/etc/init/android.hardware.light@2.0-service-mediatek-lazy.rc
 import /vendor/etc/init/lights-mtk-default.rc
@@ -155,7 +158,7 @@ on post-fs
     start keyinstall-1-0
     start vendor.light-default
     start merged_hal_service
-    start health-hal-2-1
+    start vendor.health-default
 
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
@@ -189,13 +192,17 @@ on late-fs
     start vendor.keymaster-4-1
     start vendor.keymaster-4-1-trustonic
     start vendor.keymaster-4-1-beanpod
+    start vendor.keymint-default
+    start vendor.keymint-trustonic
+    start vendor.keymint-beanpod
     start keymaster_attestation-1-1
     exec_start wait_for_keymaster
     mount_all --late
 
 on post-fs-data
     write /proc/bootprof "INIT:post-fs-data"
-
+    wait_for_prop vendor.all.modules.ready 1
+    write /proc/bootprof "modprobe: Load_Module_DONE"
     #Thermal
     mkdir /data/.tp/ 0775 system system
 
@@ -299,11 +306,27 @@ service atcid-daemon-u /vendor/bin/atcid
     user root
     group radio system
     oneshot
-#prize del by lvyuanchuan for disable-fg,20221026
+
 service fuelgauged /vendor/bin/fuelgauged
-#    class main
+    class main
     user system
     group system
+
+#prize add by durunshen for fingerprint-chip_id,20230403
+on load_persist_props_action
+    setprop persist.vendor.overlay.fp_model 0
+service vendor.fingerprint_hal /vendor/bin/hw/vendor.fp.hardware.fingerprint@2.1-service
+    # "class hal" causes a race condition on some devices due to files created
+    # in /data. As a workaround, postpone startup until later in boot once
+    # /data is mounted.
+    class core
+    user system
+    group system input uhid
+    writepid /dev/cpuset/system-background/tasks
+    #prize add by durunshen for fingerprint, X9LAVA-451 start
+    disabled
+    #prize add by durunshen for fingerprint, X9LAVA-451 end 
+#prize add by durunshen for fingerprint-chip_id,20230403
 
 on property:vendor.mtk.factory.start=1
     stop factory_no_image
@@ -312,9 +335,6 @@ on property:vendor.mtk.factory.start=1
 on property:ro.boot.usbconfig=0 && property:sys.usb.configfs=1
     write /proc/bootprof "INIT:start adbd"
     start adbd
-
-    # Generate linker config based on apex mounted in bootstrap namespace
-    update_linker_config
 
 on property:sys.usb.ffs.ready=1 && property:ro.boot.usbconfig=0 && property:sys.usb.configfs=1
     write /proc/bootprof "INIT:on property:ro.boot.usbconfig=0"
@@ -354,9 +374,6 @@ on property:ro.boot.usbconfig=2 && property:sys.usb.configfs=1
 on property:ro.boot.usbconfig=3 && property:sys.usb.configfs=1
     write /proc/bootprof "INIT:start adbd"
     start adbd
-
-    # Generate linker config based on apex mounted in bootstrap namespace
-    update_linker_config
 
 on property:sys.usb.ffs.ready=1 && property:ro.boot.usbconfig=3 && property:sys.usb.configfs=1
     write /proc/bootprof "INIT:on property:ro.boot.usbconfig 3"

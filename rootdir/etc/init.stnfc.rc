@@ -1,3 +1,4 @@
+
 # This file needs to be executed by vendor_init at boot of the device,
 # in normal and FM mode.
 

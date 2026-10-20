@@ -1,3 +1,5 @@
+import /vendor/etc/init/hw/init.mtkgki.rc
+
 # MTK project .rc configure
 
 on early-init

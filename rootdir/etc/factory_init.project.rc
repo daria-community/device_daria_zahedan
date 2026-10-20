@@ -1,3 +1,5 @@
+import /vendor/etc/init/hw/init.mtkgki.rc
+
 mkdir /data/misc/sensors 0664 system system
 
 service msensord /system/bin/msensord
