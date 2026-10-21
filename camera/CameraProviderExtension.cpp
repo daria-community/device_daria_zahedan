@@ -8,12 +8,12 @@
 
 #include <fstream>
 
-#define TORCH_BRIGHTNESS "torch_brightness"
-#define TORCH_MAX_BRIGHTNESS "torch_max_brightness"
+#define TORCH_BRIGHTNESS "brightness"
+#define TORCH_MAX_BRIGHTNESS "max_brightness"
 
 static std::string kTorchLedPaths[] = {
-        "/sys/devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360_pmu_fled.3.auto/mt6360_pmu_fled.0/rt-flash-led.0/flashlight/mt-flash-led1",
-        "/sys/devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360_pmu_fled.3.auto/mt6360_pmu_fled.1/rt-flash-led.1/flashlight/mt-flash-led2",
+        "/sys/devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1",
+        "/sys/devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2",
 };
 
 /**
