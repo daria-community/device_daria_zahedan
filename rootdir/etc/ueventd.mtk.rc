@@ -211,3 +211,4 @@
 /dev/dma_heap/mtk_wfd_region               0444   system   system
 /dev/dma_heap/mtk_wfd_region-aligned       0444   system   system
 /dev/dma_heap/mtk_wfd_page-uncached        0444   system   system
+/dev/hf_manager                  0666    system  system
