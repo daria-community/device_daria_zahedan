@@ -89,13 +89,15 @@ BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/p
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_ramdisk/*.ko)
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/prebuilt/modules/vendor_ramdisk/modules.load.recovery))
 
-# Vendor DLKM modules
-BOARD_VENDOR_DLKM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/prebuilt/modules/vendor_dlkm/modules.load))
-BOARD_VENDOR_DLKM_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_dlkm/*.ko)
+# Vendor DLKM modules (installed into /vendor_dlkm/lib/modules by AOSP Makefile)
+BOARD_USES_VENDOR_DLKMIMAGE := true
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/prebuilt/modules/vendor_dlkm/modules.load))
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/vendor_dlkm/*.ko)
 
-# System DLKM modules
-BOARD_SYSTEM_DLKM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/prebuilt/modules/system_dlkm/modules.load))
-BOARD_SYSTEM_DLKM_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/system_dlkm/*.ko)
+# System DLKM modules (installed into /system_dlkm/lib/modules by AOSP Makefile)
+BOARD_USES_SYSTEM_DLKMIMAGE := true
+BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/prebuilt/modules/system_dlkm/modules.load))
+BOARD_SYSTEM_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)/prebuilt/modules/system_dlkm/*.ko)
 
 # Kernel
 TARGET_KERNEL_ARCH := arm64
