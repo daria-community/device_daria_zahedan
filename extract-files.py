@@ -23,6 +23,7 @@ module = ExtractUtilsModule(
     'zahedan',
     'daria',
     blob_fixups=blob_fixups,
+    check_elf=False,
     add_firmware_proprietary_file=True,
 )
 
