@@ -13,3 +13,6 @@ type sysfs_rotation, sysfs_type, fs_type;
 
 # Torch
 type sysfs_torch, sysfs_type, fs_type;
+
+# Charger (Kernel 6.6 procfs)
+type proc_battery_cmd, fs_type, proc_type;
