@@ -31,7 +31,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRIVATE_BUILD_DESC="zahedan-user 15 AP3A.241105.008 V6.7.2.0.BOND release-keys" \
     BuildDesc="zahedan-user 15 AP3A.241105.008 V6.7.2.0.BOND release-keys" \
     BuildFingerprint=$(BUILD_FINGERPRINT) \
-    BuildDesc="zahedan-user 15 AP3A.241105.008 V6.7.2.0.BOND release-keys" \
-    BuildFingerprint=$(BUILD_FINGERPRINT)
 
 PRODUCT_GMS_CLIENTID_BASE := android-jimi
