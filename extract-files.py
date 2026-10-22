@@ -15,7 +15,7 @@ from extract_utils.main import (  # pyright: ignore
 
 blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/hw/hwcomposer.mt6877.so': blob_fixup().binary_regex_replace(
-        b'OnScreenFingerprintDimLayer', b'UdfpsControllerOverlay\x00\x00\x00\x00\x00'
+        b'OnScreenFingerprintDimLayer', b'SurfaceView[UdfpsController'
     ),
 }
 
