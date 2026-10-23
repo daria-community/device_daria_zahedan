@@ -1066,7 +1066,6 @@ vendor/lib64/libvendor.goodix.hardware.biometrics.fingerprint.so
 vendor/lib64/libvendor.goodix.hardware.biometrics.fingerprint@2.1.so
 
 # FM radio
--system_ext/lib64/libfmjni.so:system/lib64/libfmjni.so
 vendor/etc/init/init.fmradio_drv.rc
 
 # Gatekeeper
