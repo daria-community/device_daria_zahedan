@@ -44,8 +44,6 @@ vendor/etc/init/atcid.rc
 vendor/etc/init/audiocmdservice_atci.rc
 vendor/etc/vintf/manifest/android.hardware.audio.effect.service-aidl.xml
 vendor/etc/vintf/manifest/android.hardware.audio.service-mediatek-aidl.xml
-vendor/etc/vintf/manifest/bluetooth_audio.xml
-vendor/lib/libalsautils.so
 vendor/lib/libbwc.so
 vendor/lib64/android.hardware.audio.core-impl-mediatek.so
 vendor/lib64/android.hardware.bluetooth.audio-impl-mediatek.so
