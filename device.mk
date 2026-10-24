@@ -54,7 +54,6 @@ PRODUCT_PACKAGES += \
     libaudio_aidl_conversion_common_ndk.vendor \
     libaudioutils.vendor \
     libbluetooth_audio_session \
-    libbluetooth_audio_session_aidl.vendor \
     libalsautils \
     libnbaio_mono \
     libtinycompress \
