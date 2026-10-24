@@ -1,21 +1,18 @@
 # Battery
-genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0064/power_supply       u:object_r:sysfs_batteryinfo:s0
+genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0064/power_supply u:object_r:sysfs_batteryinfo:s0
 
 # Wakeup
-genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0066/wakeup             u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0066/wakeup u:object_r:sysfs_wakeup:s0
 
 # Vibrator
-genfscon sysfs /devices/platform/11f00000.i2c6/i2c-6/6-005a/leds/aw_vibrator   u:object_r:sysfs_vibrator:s0
+genfscon sysfs /devices/platform/11f00000.i2c6/i2c-6/6-005a/leds/aw_vibrator u:object_r:sysfs_vibrator:s0
 
 # Touch gesture
-genfscon sysfs /devices/platform/goodix_ts.0/gesture                           u:object_r:sysfs_touchgesture:s0
+genfscon sysfs /devices/platform/goodix_ts.0/gesture u:object_r:sysfs_touchgesture:s0
 
-# Light & Torch (Kernel 6.6 mt6360-led)
-genfscon sysfs /devices/platform/common_node/hbmstate                          u:object_r:sysfs_leds:s0
-genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1/brightness      u:object_r:sysfs_torch:s0
-genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1/max_brightness  u:object_r:sysfs_torch:s0
-genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2/brightness      u:object_r:sysfs_torch:s0
-genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2/max_brightness  u:object_r:sysfs_torch:s0
-
-# Charger (Kernel 6.6 procfs)
-genfscon proc /mtk_battery_cmd                                                 u:object_r:proc_battery_cmd:s0
+# Light & Torch
+genfscon sysfs /devices/platform/common_node/hbmstate u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1/brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1/max_brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2/brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2/max_brightness u:object_r:sysfs_torch:s0
