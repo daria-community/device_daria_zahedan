@@ -67,6 +67,8 @@ on init
     chown system system /sys/devices/platform/charger/cmd_charge_disable
     chown system system /sys/devices/platform/charger/user_charging_disabled
     chown system system /proc/mtk_battery_cmd/cmd_charge_disable
+    chown system system /sys/class/factory_charger/cmd_charge_disable
+    chmod 0664 /sys/class/factory_charger/cmd_charge_disable
 # pri X91V-154 added by zhangyifeng 20250403 end
     exec_background u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d \
         /vendor/lib/modules gt9916r_daria.ko
