@@ -21,12 +21,14 @@ VENDOR_SYMLINKS := \
     $(TARGET_OUT_VENDOR)/lib \
     $(TARGET_OUT_VENDOR)/lib64 \
     $(TARGET_OUT_VENDOR)/lib/hw \
-    $(TARGET_OUT_VENDOR)/lib64/hw
+    $(TARGET_OUT_VENDOR)/lib64/hw \
+    $(TARGET_OUT_VENDOR)/etc/.vintf_cleaned
 
 $(VENDOR_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) echo "Making vendor symlinks"
 	@mkdir -p $(TARGET_OUT_VENDOR)/lib/hw $(TARGET_OUT_VENDOR)/lib/mt6877
-	@mkdir -p $(TARGET_OUT_VENDOR)/lib64/hw $(TARGET_OUT_VENDOR)/lib64/mt6877
+	@mkdir -p $(TARGET_OUT_VENDOR)/lib64/hw $(TARGET_OUT_VENDOR)/lib64/mt6877 $(TARGET_OUT_VENDOR)/etc
+	@rm -f $(TARGET_OUT_VENDOR)/etc/vintf/manifest/thermal-mediatek.xml $(TARGET_OUT_VENDOR)/etc/init/thermal-mediatek.rc
 	@ln -sf /vendor/lib/egl/libGLES_mali.so $(TARGET_OUT_VENDOR)/lib/hw/vulkan.$(TARGET_BOARD_PLATFORM).so
 	@ln -sf /vendor/lib64/egl/libGLES_mali.so $(TARGET_OUT_VENDOR)/lib64/hw/vulkan.$(TARGET_BOARD_PLATFORM).so
 	@ln -sf /vendor_dlkm/lib/modules $(TARGET_OUT_VENDOR)/lib/modules
