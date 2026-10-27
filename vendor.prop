@@ -136,7 +136,6 @@ ro.vendor.pq.mtk_ultra_dimming_support=0
 ro.vendor.pq.mtk_ultra_resolution_support=1
 ro.vendor.pq.mtk_video_transition=0
 ro.vendor.mtk_backlight_hwc_support=1
-ro.vendor.mtk_blulight_def_support=1
 ro.vendor.mtk_hdr_video_support=1
 ro.vendor.mtk_aod_support=1
 
