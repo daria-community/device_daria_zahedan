@@ -1473,7 +1473,7 @@ vendor/etc/power_game_cfg.xml
 vendor/etc/powercontable.xml
 vendor/etc/powerscntbl.xml
 vendor/etc/task_profiles.json
-vendor/etc/vintf/manifest/power-mediatek.xml
+vendor/etc/vintf/manifest/power-mediatek.xml:vendor/etc/vintf/manifest/power-mtk.xml
 vendor/lib/vendor.mediatek.hardware.mtkpower-V2-ndk.so
 vendor/lib/vendor.mediatek.hardware.mtkpower@1.0.so
 vendor/lib/vendor.mediatek.hardware.mtkpower@1.1.so
