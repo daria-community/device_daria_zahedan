@@ -40,19 +40,10 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Audio
 PRODUCT_PACKAGES += \
-    android.hardware.audio.common@5.0.vendor \
-    android.hardware.audio.common-V3-ndk.vendor \
-    android.hardware.audio.core-V2-ndk.vendor \
-    android.hardware.audio.core.sounddose-V2-ndk.vendor \
-    android.hardware.audio.effect-V2-ndk.vendor \
-    android.media.audio.common.types-V3-ndk.vendor \
     audio.bluetooth.default \
     audio.primary.default \
     audio.r_submix.default \
     audio.usb.default \
-    libaudioaidlcommon.vendor \
-    libaudio_aidl_conversion_common_ndk.vendor \
-    libaudioutils.vendor \
     libbluetooth_audio_session \
     libalsautils \
     libnbaio_mono \
