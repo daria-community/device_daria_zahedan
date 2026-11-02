@@ -1,4 +1,0 @@
-service vendor.vibrator-zahedan /vendor/bin/hw/android.hardware.vibrator-service.zahedan
-    class hal
-    user system
-    group system
