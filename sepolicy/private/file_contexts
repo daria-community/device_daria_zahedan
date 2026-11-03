@@ -1,2 +1,11 @@
+# Audio parameter parser
+/(system_ext|system/system_ext)/bin/hw/android\.hardware\.audio\.parameter_parser\.example_service u:object_r:audio_vendor_parameter_parser_exec:s0
+
+# MediaTek system_ext logging & diagnostics daemons
+/(system_ext|system/system_ext)/bin/emdlogger                u:object_r:emdlogger_exec:s0
+/(system_ext|system/system_ext)/bin/loghidlsysservice        u:object_r:loghidlsysservice_exec:s0
+/(system_ext|system/system_ext)/bin/mobile_log_d             u:object_r:mobile_log_d_exec:s0
+/(system_ext|system/system_ext)/bin/netdiag                  u:object_r:netdiag_exec:s0
+
 # Sensors
-/(system_ext|system/system_ext)/bin/als_correction_service    u:object_r:als_correction_service_exec:s0
+/(system_ext|system/system_ext)/bin/als_correction_service   u:object_r:als_correction_service_exec:s0

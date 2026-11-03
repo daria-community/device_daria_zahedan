@@ -1,0 +1,8 @@
+# APUWare & NeuroPilot AIDL
+vendor.mediatek.hardware.apuware.xrp.INeuronXrp/default         u:object_r:hal_neuralnetworks_service:s0
+vendor.mediatek.hardware.neuropilot.agent.IAgent/default        u:object_r:hal_neuralnetworks_service:s0
+
+# Camera AIDL instances
+android.hardware.camera.provider.ICameraProvider/external/0     u:object_r:hal_camera_service:s0
+vendor.mediatek.hardware.camera.bgservice.IBGService/internal/0 u:object_r:hal_camera_service:s0
+vendor.mediatek.hardware.camera.isphal.IISPModule/internal/0    u:object_r:hal_camera_service:s0

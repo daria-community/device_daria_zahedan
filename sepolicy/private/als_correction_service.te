@@ -24,3 +24,4 @@ allow als_correction_service ion_device:chr_file rw_file_perms;
 
 allow als_correction_service sysfs_pix_manager:dir search;
 allow als_correction_service sysfs_pix_manager:file rw_file_perms;
+allow als_correction_service dmabuf_system_heap_device:chr_file r_file_perms;

@@ -1,1 +1,2 @@
 allow hal_audio_default persist_data_file:dir search;
+add_service(hal_audio_default, mtk_hal_audio_service)
