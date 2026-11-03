@@ -21,9 +21,23 @@
 #include <hardware/hardware.h>
 #include "BiometricsFingerprint.h"
 
+#include <fcntl.h>
 #include <inttypes.h>
 #include <pthread.h>
 #include <unistd.h>
+
+#define HBM_PATH "/sys/devices/platform/14013000.dsi/hbm"
+
+static void setHbmState(bool enabled) {
+    int fd = open(HBM_PATH, O_WRONLY);
+    if (fd >= 0) {
+        const char val = enabled ? '1' : '0';
+        write(fd, &val, 1);
+        close(fd);
+    } else {
+        ALOGE("Failed to open %s", HBM_PATH);
+    }
+}
 
 #define GF_ERROR_CANCELED 1009
 
@@ -72,6 +86,7 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
+    setHbmState(true);
     usleep(50*1000);
     goodixExtCmd(0, 1, 0);
 
@@ -80,6 +95,7 @@ Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, floa
 
 Return<void> BiometricsFingerprint::onFingerUp() {
     goodixExtCmd(0, 0, 0);
+    setHbmState(false);
 
     return Void();
 }
