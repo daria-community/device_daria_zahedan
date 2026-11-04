@@ -60,7 +60,7 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
-    name: "init.mt6877.usb.rc",
+    name: "init.mt6877.usb.zahedan.rc",
     src: "etc/init.mt6877.usb.rc",
     sub_dir: "init/hw",
     vendor: true,
