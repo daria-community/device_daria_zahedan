@@ -1,0 +1,15 @@
+cc_library_shared {
+    name: "libcodec2_igba_shim",
+    vendor: true,
+    compile_multilib: "32",
+    srcs: ["codec2_igba_shim.cpp"],
+    shared_libs: [
+        "libcodec2_vndk",
+        "libbase",
+    ],
+    header_libs: [
+        "libcodec2_headers",
+        "media_plugin_headers",
+    ],
+    cflags: ["-Wall"],
+}

@@ -17,6 +17,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/developer_gsi_keys.mk)
 
+# ION
+# Vendor copy of libion for prebuilt MediaTek blobs (libgralloc_extra, camera, codec2).
+# Not visible to vendor from system in this build, so install it into /vendor explicitly.
+PRODUCT_PACKAGES += \
+    libion.vendor
+
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
@@ -140,8 +146,7 @@ PRODUCT_PACKAGES += \
     android.hardware.memtrack-V1-ndk.vendor \
     libdrm.vendor \
     libdrm \
-    libexpat.vendor \
-    disable_configstore
+    libexpat.vendor
 
 $(call soong_config_set,surfaceflinger,has_mtk_surfaceflinger,true)
 
@@ -234,7 +239,6 @@ PRODUCT_PACKAGES += \
     android.hidl.token@1.0.vendor \
     android.hidl.token@1.0-utils.vendor \
     android.system.suspend-V1-ndk.vendor \
-    android.system.suspend@1.0.vendor \
     libhidltransport \
     libhidltransport.vendor \
     libhwbinder \
@@ -352,7 +356,8 @@ PRODUCT_PACKAGES += \
     android.hardware.power-V5-ndk.vendor \
     android.hardware.power@1.0.vendor \
     android.hardware.power@1.1.vendor \
-    android.hardware.power@1.2.vendor
+    android.hardware.power@1.2.vendor \
+    android.hardware.power-service.example
 
 # Properties
 include $(LOCAL_PATH)/vendor_logtag.mk
@@ -418,7 +423,7 @@ PRODUCT_PACKAGES += \
     init.connectivity.rc \
     init.modem.rc \
     init.mt6877.rc \
-    init.mt6877.usb.rc \
+    init.mt6877.usb.zahedan.rc \
     init.mt6877.vendor.rc \
     init.mtkgki.rc \
     init.project.rc \
@@ -508,3 +513,6 @@ PRODUCT_COPY_FILES += \
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/daria/zahedan/zahedan-vendor.mk)
+
+PRODUCT_PACKAGES += \
+    libcodec2_shim_blockpool

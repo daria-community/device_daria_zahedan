@@ -2028,7 +2028,7 @@ vendor/etc/init/vendor.mediatek.hardware.nwk_opt@1.0-service.rc
 vendor/etc/init/wlan_assistant.rc
 vendor/etc/vintf/manifest/CommandService.xml
 vendor/etc/vintf/manifest/android.hardware.tetheroffload-V1-service.xml
-vendor/etc/wifi/vendor_hals/mtk.xml
+# vendor/etc/wifi/vendor_hals/mtk.xml  (replaced by libwifi-hal-wrapper)
 vendor/lib/libconnfem.so
 vendor/lib64/libapmonitor_vendor.so
 vendor/lib64/libconnfem.so

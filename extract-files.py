@@ -17,6 +17,8 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/hw/hwcomposer.mt6877.so': blob_fixup().binary_regex_replace(
         b'OnScreenFingerprintDimLayer', b'SurfaceView[UdfpsController'
     ),
+    'vendor/lib/libcodec2_aidl.so': blob_fixup()
+        .add_needed('libcodec2_shim_blockpool.so'),
 }
 
 module = ExtractUtilsModule(

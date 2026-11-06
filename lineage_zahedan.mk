@@ -11,6 +11,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from device makefile.
 $(call inherit-product, device/daria/zahedan/device.mk)
 
+TARGET_HAS_UDFPS := true
+TARGET_SUPPORTS_BLUR := true
+TARGET_DISABLE_MATLOG := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_EXCLUDES_AUDIOFX := false
+
 PRODUCT_PACKAGES += \
     SettingsProviderOverlayZahedan
 

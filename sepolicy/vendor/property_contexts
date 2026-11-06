@@ -157,3 +157,7 @@ ro.odm.fingerprint    u:object_r:vendor_odm_factory_prop:s0
 ro.odm.auto_test    u:object_r:vendor_odm_factory_prop:s0
 ro.odm.auto_test_show_results    u:object_r:vendor_odm_factory_prop:s0
 ro.odm.doujia_dog_free    u:object_r:vendor_odm_factory_prop:s0
+
+# [enforcing-fixes] camera debug prop
+# set by mtk_hal_camera (was vendor_default_prop -> denied)
+vendor.debug.professional.    u:object_r:vendor_odm_camera_prop:s0

@@ -23,6 +23,7 @@
 
 #include <fcntl.h>
 #include <inttypes.h>
+#include <mutex>
 #include <pthread.h>
 #include <unistd.h>
 
@@ -37,6 +38,37 @@ static void setHbmState(bool enabled) {
     } else {
         ALOGE("Failed to open %s", HBM_PATH);
     }
+}
+
+// Time given to the framework dim layer (UdfpsHelper) to reach the panel
+// before HBM is switched on, so the screen never flashes bright first.
+static constexpr useconds_t kDimSettleUs = 40 * 1000;
+// Time between HBM on and starting the capture.
+static constexpr useconds_t kHbmSettleUs = 50 * 1000;
+
+// Protects the touch state below. goodixExtCmd() is deliberately called with
+// this lock held so a late onFingerUp() can never leave the sensor armed.
+static std::mutex sTouchLock;
+// Bumped by every onFingerDown()/onFingerUp(); lets a pending onFingerDown()
+// notice that the finger was already released/cancelled while it was waiting.
+static uint32_t sTouchSeq = 0;
+// true between goodixExtCmd(0, 1, 0) and goodixExtCmd(0, 0, 0).
+static bool sFingerDown = false;
+
+typedef int32_t (*GoodixExtCmd)(struct fingerprint_device *, uint32_t, uint32_t);
+
+// The capture for the current touch is finished (one enroll step done): turn
+// HBM off right away instead of waiting for the finger to physically lift,
+// the framework has already removed the pressed icon and the dim layer.
+// No-op when a newer touch is still being armed.
+static void finishCapture(GoodixExtCmd cmd) {
+    std::lock_guard<std::mutex> lock(sTouchLock);
+    if (!sFingerDown) {
+        return;
+    }
+    sFingerDown = false;
+    cmd(0, 0, 0);
+    setHbmState(false);
 }
 
 #define GF_ERROR_CANCELED 1009
@@ -86,14 +118,39 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
 }
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
-    setHbmState(true);
-    usleep(50*1000);
-    goodixExtCmd(0, 1, 0);
+    uint32_t seq;
+    {
+        std::lock_guard<std::mutex> lock(sTouchLock);
+        seq = ++sTouchSeq;
+    }
+
+    // SystemUI applies the dim layer on touch; give it time to land first.
+    usleep(kDimSettleUs);
+    {
+        std::lock_guard<std::mutex> lock(sTouchLock);
+        if (seq != sTouchSeq) {
+            return Void();  // finger already released / cancelled
+        }
+        setHbmState(true);
+    }
+
+    usleep(kHbmSettleUs);
+    {
+        std::lock_guard<std::mutex> lock(sTouchLock);
+        if (seq != sTouchSeq) {
+            return Void();  // onFingerUp() already turned HBM off
+        }
+        goodixExtCmd(0, 1, 0);
+        sFingerDown = true;
+    }
 
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
+    std::lock_guard<std::mutex> lock(sTouchLock);
+    ++sTouchSeq;  // abort an onFingerDown() that is still waiting
+    sFingerDown = false;
     goodixExtCmd(0, 0, 0);
     setHbmState(false);
 
@@ -375,6 +432,7 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t *msg) {
                     msg->data.enroll.samples_remaining).isOk()) {
                 ALOGE("failed to invoke fingerprint onEnrollResult callback");
             }
+            finishCapture(thisPtr->goodixExtCmd);
             break;
         case FINGERPRINT_TEMPLATE_REMOVED:
             ALOGD("onRemove(fid=%d, gid=%d, rem=%d)",

@@ -68,7 +68,7 @@ BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive printk.devkmsg=on
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive
 
 BOARD_MKBOOTIMG_ARGS := --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
@@ -200,7 +200,7 @@ DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE += $(DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(DEVICE_PATH)/framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
+    
 
 # VNDK
 BOARD_VNDK_VERSION := current
@@ -221,3 +221,8 @@ WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 
 # Inherit the proprietary files
 include vendor/daria/zahedan/BoardConfigVendor.mk
+
+# MediaTek WiFi HAL: the prebuilt vendor blob predates the wifi_rtt_*_v4 fields (AOSP commit 479bddce9c)
+SOONG_CONFIG_NAMESPACES += mediatek_wifi_hal
+SOONG_CONFIG_mediatek_wifi_hal += use_pre_baklava_qpr0_struct
+SOONG_CONFIG_mediatek_wifi_hal_use_pre_baklava_qpr0_struct := true

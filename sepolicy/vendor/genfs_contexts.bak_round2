@@ -1,0 +1,31 @@
+# Battery
+genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0064/power_supply u:object_r:sysfs_batteryinfo:s0
+
+# Wakeup
+genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0066/wakeup u:object_r:sysfs_wakeup:s0
+
+# Vibrator
+genfscon sysfs /devices/platform/11f00000.i2c6/i2c-6/6-005a/leds/aw_vibrator u:object_r:sysfs_vibrator:s0
+
+# Touch gesture
+genfscon sysfs /devices/platform/goodix_ts.0/gesture u:object_r:sysfs_touchgesture:s0
+
+# Light & Torch
+genfscon sysfs /devices/platform/common_node/hbmstate u:object_r:sysfs_leds:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1/brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch1/max_brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2/brightness u:object_r:sysfs_torch:s0
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-led.3.auto/leds/mt6360_flash_ch2/max_brightness u:object_r:sysfs_torch:s0
+
+# Charger
+genfscon sysfs /class/factory_charger/cmd_charge_disable u:object_r:sysfs_charge_disable:s0
+
+# [enforcing-fixes] charger + wakeup
+# Charger power_supply (type/online): health HAL could not read it -> chg= was empty
+genfscon sysfs /devices/platform/11d00000.i2c5/i2c-5/5-0034/mt6360-chg.2.auto/power_supply u:object_r:sysfs_batteryinfo:s0
+
+# Wakeup sources read by system_suspend (longest prefix wins over the cw-bat power_supply rule)
+genfscon sysfs /devices/platform/11d01000.i2c7/i2c-7/7-0064/power_supply/cw-bat/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10027000.spmi/spmi-0/0-03/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/10026000.pwrap/10026000.pwrap:mt6359p/mt6359p-rtc/rtc/rtc0/alarmtimer.0.auto/wakeup u:object_r:sysfs_wakeup:s0
+genfscon sysfs /devices/platform/goodix_ts.0/wakeup u:object_r:sysfs_wakeup:s0

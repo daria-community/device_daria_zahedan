@@ -83,7 +83,7 @@ void updateScreenBuffer() {
             ALS_POS_X + ALS_RADIUS, ALS_POS_Y + ALS_RADIUS);
     displayCaptureArgs.width = ALS_RADIUS * 2;
     displayCaptureArgs.height = ALS_RADIUS * 2;
-    displayCaptureArgs.captureArgs.captureSecureLayers = true;
+    displayCaptureArgs.captureArgs.secureLayerMode = ::android::gui::SecureLayerMode::Capture;
 
     DisplayState state;
     SurfaceComposerClient::getDisplayState(display, &state);
